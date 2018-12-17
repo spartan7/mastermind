@@ -1,0 +1,26 @@
+#background {
+	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/2247986/background.png);
+	height: 800px;
+	width: 1200px;
+}
+
+#fighter {
+	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/2247986/fighter.png);
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	top: 700px;
+	left: 550px;
+
+
+}
+
+.aliens {
+	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/2247986/aliens.png);
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	top: 100px;
+	left: 550px;
+
+}

@@ -37,7 +37,6 @@ var missileInterval = null;
 document.onkeydown = function(e){
 	if (e.keyCode == 37) {
     	if (leftKeyIsBeingPressed === false){
-    	console.log('LEFT KEY DOWN');
     	leftKeyInterval = setInterval(moveFighterToTheLeft,100);
     	}
     leftKeyIsBeingPressed = true;
@@ -45,7 +44,6 @@ document.onkeydown = function(e){
  }
   	else if (e.keyCode == 39) {
     	if (rightKeyIsBeingPressed === false){
-      		console.log('RIGHT KEY DOWN');
       		rightKeyInterval = setInterval(moveFighterToTheRight,100);
   		}            
   	rightKeyIsBeingPressed = true;
@@ -54,7 +52,6 @@ document.onkeydown = function(e){
 
 	else if (e.keyCode == 32) {
 		if (missileKeyIsBeingPressed === false){
-	    	console.log('SPACEBAR IS DOWN');
 	        missileInterval = setInterval(fireKeyMissile,100);
 		}
 	    missileKeyIsBeingPressed = true;
@@ -63,17 +60,14 @@ document.onkeydown = function(e){
 
 document.onkeyup = function(e) {
 	if (e.keyCode === 39){
-  		console.log('RIGHT KEY UP');
     	rightKeyIsBeingPressed = false;
     	clearInterval(rightKeyInterval);
   	}
   	else if (e.keyCode == 37){
-    	console.log('LEFT KEY UP');
     	leftKeyIsBeingPressed = false;
     	clearInterval(leftKeyInterval);
   	}
   	else if (e.keyCode === 32){
-	    console.log('SPACEBAR KEY UP');
 	    missileKeyIsBeingPressed = false;
 	    clearInterval(missileInterval); 
   	}

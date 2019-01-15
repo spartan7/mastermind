@@ -20,18 +20,75 @@ missiles = [];
 
 var score = 0;
 
-// Movement of the fighter left and right with keypress
+var rightKeyIsBeingPressed = false;
+
+var leftKeyIsBeingPressed = false;
+
+var missileKeyIsBeingPressed = false;
+
+var rightKeyInterval = null;
+
+var leftKeyInterval = null;
+
+var missileInterval = null;
+
+
+// Creation and movement of the fighter left and right with keypress
 document.onkeydown = function(e){
 	if (e.keyCode == 37) {
-	    fighterX = fighterX - 5;
-	}
-	else if (e.keyCode == 39) {
-		fighterX = fighterX + 5;
-	}
+    	if (leftKeyIsBeingPressed === false){
+    	console.log('LEFT KEY DOWN');
+    	leftKeyInterval = setInterval(moveFighterToTheLeft,100);
+    	}
+    leftKeyIsBeingPressed = true;
+    fighterX = fighterX -5;        
+ }
+  	else if (e.keyCode == 39) {
+    	if (rightKeyIsBeingPressed === false){
+      		console.log('RIGHT KEY DOWN');
+      		rightKeyInterval = setInterval(moveFighterToTheRight,100);
+  		}            
+  	rightKeyIsBeingPressed = true;
+  	fighterX = fighterX + 5;
+}
+
 	else if (e.keyCode == 32) {
-		createMissile(fighterX,fighterY);
-		createMissile(fighterX + 45,fighterY);
-	}
+		if (missileKeyIsBeingPressed === false){
+	    	console.log('SPACEBAR IS DOWN');
+	        missileInterval = setInterval(fireKeyMissile,100);
+		}
+	    missileKeyIsBeingPressed = true;
+    }
+}
+
+document.onkeyup = function(e) {
+	if (e.keyCode === 39){
+  		console.log('RIGHT KEY UP');
+    	rightKeyIsBeingPressed = false;
+    	clearInterval(rightKeyInterval);
+  	}
+  	else if (e.keyCode == 37){
+    	console.log('LEFT KEY UP');
+    	leftKeyIsBeingPressed = false;
+    	clearInterval(leftKeyInterval);
+  	}
+  	else if (e.keyCode === 32){
+	    console.log('SPACEBAR KEY UP');
+	    missileKeyIsBeingPressed = false;
+	    clearInterval(missileInterval); 
+  	}
+}
+
+function moveFighterToTheRight(){
+  	fighterX = fighterX + 8;  
+}
+
+function moveFighterToTheLeft(){
+  	fighterX = fighterX - 8;
+}
+
+function drawFighter (){
+	canvasContext.drawImage(fighter, fighterX, fighterY);
 }
 
 //Alien Creation and Rendering
@@ -99,6 +156,11 @@ function moveMissiles() {
   	}
 }
 
+function fireKeyMissile(){
+  createMissile(fighterX,fighterY);
+  createMissile(fighterX + 45,fighterY);
+}
+
 function destroyAlien(){
 	for (var i = 0; i < missiles.length; i++){
 		for(var j = 0; j < aliens.length; j++){
@@ -111,11 +173,6 @@ function destroyAlien(){
 			}
 		} 
 	}
-}
-
-//Fighter Creation and Rendering       
-function drawFighter (){
-	canvasContext.drawImage(fighter, fighterX, fighterY);
 }
 
 //Game Over creation and rendering
